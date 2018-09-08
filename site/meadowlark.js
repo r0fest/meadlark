@@ -1,5 +1,8 @@
 var express = require('express');
 
+// Custom
+var fortune = require('./data/fortunes');
+
 var app = express();
 
 // Установка механизма представления handlebars
@@ -17,22 +20,8 @@ app.get('/', function(req, res) {
 });
 
 // Пользовательская страница О...
-var fortunes = {
-    items: [
-        'Победи свои страхи, или они победят тебя.',
-        'Рекам нужны истоки.',
-        'Не бойся неведомого',
-        'Тебя ждет приятный сюрприз',
-        'Будь проще везде, где только можно'
-    ],
-    getRandom() {
-        let random = Math.floor(Math.random() * this.items.length);
-        let result = this.items[random];
-        return result;
-    }
-};
 app.get('/about', function(req, res) {
-    res.render('about', {fortune: fortunes.getRandom()});
+    res.render('about', {fortune: fortune.getRandom()});
 });
 
 // Пользовательская страница 404
